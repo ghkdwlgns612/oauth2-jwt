@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    username: ${MYSQL_ID}
+    password: ${MYSQL_PW}
+    url: ${OAUTH2_LOCAL_URL}
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create
+
+  security:
+    oauth2:
+      client.re
