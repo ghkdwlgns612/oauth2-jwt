@@ -7,7 +7,25 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: create
-
   security:
     oauth2:
-      client.re
+      client:
+        registration:
+          intra42:
+            client-id: "${OAUTH2_42_ID}"
+            client-secret: "${OAUTH2_42_SECRET}"
+            redirect-uri: "http://localhost:8080/login/oauth2/code/intra42"
+            authorization-grant-type: authorization_code
+            client-name: intra42
+            scope: public
+        provider:
+          intra42:
+            authorization-uri: https://api.intra.42.fr/oauth/authorize
+            user-info-uri: https://api.intra.42.fr/v2/me
+            token-uri: https://api.intra.42.fr/oauth/token
+            user-name-attribute: id
+jwt:
+  token-issuer: 42.com
+  token-name: 42-AUTH-TOKEN
+  secret: 123abc
+  expire-time: 300
