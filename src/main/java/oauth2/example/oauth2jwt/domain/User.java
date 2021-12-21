@@ -39,7 +39,7 @@ public class User extends BaseTime {
     }
 
     public String getRoleKey() {
-        return this.getRoleKey();
+        return this.role.getKey();
     }
 
     public User update(String nickname, String fullname, String picture) {

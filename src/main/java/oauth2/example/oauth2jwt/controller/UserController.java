@@ -20,9 +20,9 @@ public class UserController {
         log.info("redirect");
     }
 
-    @GetMapping("/members")
+    @GetMapping("/user")
     public void test3() {
-        log.info("members");
+        log.info("user");
     }
 
     @GetMapping("/oauth2/authorization/intra42")
