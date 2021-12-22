@@ -24,8 +24,3 @@ spring:
             user-info-uri: https://api.intra.42.fr/v2/me
             token-uri: https://api.intra.42.fr/oauth/token
             user-name-attribute: id
-jwt:
-  token-issuer: 42.com
-  token-name: 42-AUTH-TOKEN
-  secret: 123abc
-  expire-time: 300

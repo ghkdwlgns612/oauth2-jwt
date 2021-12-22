@@ -4,6 +4,7 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import oauth2.example.oauth2jwt.domain.Role;
 import oauth2.example.oauth2jwt.domain.Token;
 import org.springframework.stereotype.Component;
 
@@ -21,8 +22,8 @@ public class JwtUtils {
     }
 
     public Token generateToken(String uid, String role) {
-        long tokenPeriod = 1000L * 60L * 10L;
-        long refreshPeriod = 1000L * 60L * 60L * 24L * 30L * 3L;
+        long tokenPeriod = 5000L;
+        long refreshPeriod = 5000L * 10;
 
         Claims claims = Jwts.claims().setSubject(uid);
         claims.put("role", role);
@@ -43,6 +44,21 @@ public class JwtUtils {
                         .compact());
     }
 
+    public String generateJwtToken(String uid) {
+        long tokenPeriod = 10L;
+
+        Claims claims = Jwts.claims().setSubject(uid);
+        claims.put("role", Role.USER.getKey());
+
+        Date now = new Date();
+        return Jwts.builder()
+                .setClaims(claims)
+                .setIssuedAt(now)
+                .setExpiration(new Date(now.getTime() + tokenPeriod))
+                .signWith(SignatureAlgorithm.HS256, secretKey)
+                .compact();
+    }
+
     public boolean verifyToken(String token) {
         try {
             Jws<Claims> claims = Jwts.parser()
@@ -59,6 +75,4 @@ public class JwtUtils {
     public String getUid(String token) {
         return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody().getSubject();
     }
-
-
 }

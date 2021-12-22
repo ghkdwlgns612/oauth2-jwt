@@ -36,14 +36,14 @@ public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
                 .sameSite("Lax")
                 .path("/")
                 .httpOnly(false)
-                .maxAge(7)
+                .maxAge(-1)
                 .build();
         ResponseCookie refreshCookie = ResponseCookie.from("refresh", token.getToken())
 //                .domain("42cadet.kr")
                 .sameSite("Lax")
                 .path("/")
                 .httpOnly(false)
-                .maxAge(7 * 24 * 60 * 60)
+                .maxAge(-1)
                 .build();
         response.addHeader("Set-cookie",jwtCookie.toString());
         response.addHeader("Set-cookie",refreshCookie.toString());
